@@ -2,6 +2,8 @@
 
 **Piper** enhances the PHP 8.5 pipe operator (``|>``) with support for multi-argument functions/callables.
 
+[![CI](https://github.com/Burnett01/piper/actions/workflows/tests.yml/badge.svg)](https://github.com/Burnett01/piper/actions/workflows/tests.yml)
+
 ## Why?
 
 In PHP the pipe operator (``|>``) only works with single-argument callables, such as ``strlen``, ``trim``, etc..,<br>
