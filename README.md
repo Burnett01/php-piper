@@ -35,11 +35,13 @@ use Burnett01/Piper/Piper as _;
 $nonce = random_bytes(16)
       |> base64_encode(...)
       |> _::_('strtr')->args('+/', '-_')->bind(...)
-      |> _::_('rtrim')->args('=')->bind(...);       
+      |> _::_(rtrim(...))->args('=')->bind(...);       
 ```
 
 As you can see, the pipe operator ``|>`` understands single-argument methods such as ``base64_encode``.
-The ellipsis ``...`` represents the return value (carry) from ``random_bytes``.
+The ellipsis ``...`` represents the first-class callable syntax.
+
+You can use a ``string`` or ``callable`` for passing the method.
 
 ## Usage
 
@@ -49,7 +51,7 @@ use Burnett01/Piper/Piper;
 $nonce = random_bytes(16)
       |> base64_encode(...)
       |> Piper::_('strtr')->args('+/', '-_')->bind(...)
-      |> Piper::_('rtrim')->args('=')->bind(...);       
+      |> Piper::_(rtrim(...))->args('=')->bind(...);       
 ```
 
 or aliased as ``_``
@@ -71,7 +73,7 @@ Creates an instance of Piper for the specificed ``$fn``.
 
 Parameters:
 
-- string ``$fn`` - The name of a callable (eg. a PHP method etc)
+- string | callable ``$fn`` - The name of a callable as string (eg. ``'strlen'``) or as callable (eg. ``strlen(...)``)
 
 Context: static
 
