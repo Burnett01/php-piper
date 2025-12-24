@@ -4,10 +4,9 @@
 
 [![CI](https://github.com/Burnett01/piper/actions/workflows/tests.yml/badge.svg)](https://github.com/Burnett01/piper/actions/workflows/tests.yml)
 
-
 <img src=".github/piper-logo.png" alt="Piper Logo" width="300" align="right"/>
 
-## Why?
+**Why?**
 
 In PHP the pipe operator (``|>``) only works with single-argument callables, such as ``strlen``, ``trim``, etc..,<br>
 
