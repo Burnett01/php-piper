@@ -6,7 +6,8 @@ final class Piper
     private readonly Closure $fn;
     private array $args = [];
     
-    public static function _(callable $fn): self {
+    public static function _(callable $fn): self
+    {
         $self = new self();
         $self->fn = Closure::fromCallable($fn);
         
