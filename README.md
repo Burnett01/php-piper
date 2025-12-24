@@ -1,6 +1,6 @@
 # Piper
 
-**Piper** enhances the new PHP 8.5 pipe operator (``|>``) with support for multi-argument functions/callables.
+**Piper** enhances the PHP 8.5 pipe operator (``|>``) with support for multi-argument functions/callables.
 
 ## Why?
 
@@ -44,6 +44,8 @@ The ellipsis ``...`` represents the first-class callable syntax.
 You can use a ``string`` or ``callable`` for passing the method.
 
 ## Usage
+
+> composer require burnett01/piper
 
 ```php
 use Burnett01/Piper/Piper;
