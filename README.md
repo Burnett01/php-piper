@@ -30,7 +30,7 @@ This is where **Piper** comes into play!
 ### Example
 
 ```php
-use Burnett01/Piper/Piper as _;
+use Burnett01\Piper\Piper as _;
 
 $nonce = random_bytes(16)
       |> base64_encode(...)
@@ -48,7 +48,7 @@ You can use a ``string`` or ``callable`` for passing the method.
 > composer require burnett01/piper
 
 ```php
-use Burnett01/Piper/Piper;
+use Burnett01\Piper\Piper;
 
 $nonce = random_bytes(16)
       |> base64_encode(...)
@@ -59,7 +59,7 @@ $nonce = random_bytes(16)
 or aliased as ``_``
 
 ```php
-use Burnett01/Piper/Piper as _;
+use Burnett01\Piper\Piper as _;
 
 $nonce = random_bytes(16)
       |> base64_encode(...)
