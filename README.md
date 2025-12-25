@@ -1,6 +1,6 @@
 # Piper
 
-**Piper** enhances the PHP 8.5 [pipe operator](https://php.watch/versions/8.5/pipe-operator) (``|>``) with support for multi-argument functions/callables.
+**Piper** enhances the PHP 8.5 pipe operator ([``|>``](https://php.watch/versions/8.5/pipe-operator)) with support for multi-argument functions/callables.
 
 [![phpunit](https://github.com/Burnett01/piper/actions/workflows/phpunit.yml/badge.svg)](https://github.com/Burnett01/piper/actions/workflows/phpunit.yml) [![phpstan](https://github.com/Burnett01/piper/actions/workflows/phpstan.yml/badge.svg)](https://github.com/Burnett01/piper/actions/workflows/phpstan.yml) [![phpcs](https://github.com/Burnett01/piper/actions/workflows/phpcs.yml/badge.svg)](https://github.com/Burnett01/piper/actions/workflows/phpcs.yml) ![Packagist Version](https://img.shields.io/packagist/v/burnett01/piper)
 
