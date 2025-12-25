@@ -3,6 +3,14 @@
   "description": "Piper enhances the PHP 8.5 pipe operator (|>) with support for multi-argument functions/callables.",
   "type": "library",
   "license": "MIT",
+  "keywords": ["pipe", "operator", "callable", "php85", "php8"],
+  "homepage": "https://github.com/Burnett01/php-piper",
+  "authors": [
+    {
+      "name": "Burnett01",
+      "role": "Developer"
+    }
+  ],
   "require": {
     "php": "^8.5"
   },
