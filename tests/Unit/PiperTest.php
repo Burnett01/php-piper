@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Burnett01\Piper\Piper;
 
 use function Burnett01\Piper\pipe;
+use function Burnett01\Piper\with;
 
 final class PiperTest extends TestCase
 {
@@ -117,6 +118,16 @@ final class PiperTest extends TestCase
         $actual = -1234.5
             |> abs(...)
             |> pipe(number_format(...), 2, '.', ',')
+            |> urlencode(...);
+
+        self::assertSame('1%2C234.50', $actual);
+    }
+
+    public function testWithFunction(): void
+    {
+        $actual = -1234.5
+            |> abs(...)
+            |> with(number_format(...), 2, '.', ',')
             |> urlencode(...);
 
         self::assertSame('1%2C234.50', $actual);

@@ -46,13 +46,23 @@ This is where **Piper** comes into play!
 
 PSR-4 function version:
 ```php
+use function Burnett01\Piper\with;
+
+$nonce = random_bytes(16)
+      |> base64_encode(...)
+      |> with('strtr', '+/', '-_')
+      // first-class syntax
+      |> with(rtrim(...), '=');
+
+// or pipe() function
+
 use function Burnett01\Piper\pipe;
 
 $nonce = random_bytes(16)
       |> base64_encode(...)
       |> pipe('strtr', '+/', '-_')
       // with first-class syntax
-      |> pipe(rtrim(...), '=');       
+      |> pipe(rtrim(...), '=');
 ```
 
 PSR-4 class version:
@@ -62,7 +72,7 @@ use Burnett01\Piper\Piper as pipe;
 $nonce = random_bytes(16)
       |> base64_encode(...)
       |> pipe::to('strtr', '+/', '-_')
-      // or use 'with' + first-class syntax
+      // or 'with' + first-class syntax
       |> pipe::with(rtrim(...), '=');       
 ```
 
@@ -73,11 +83,11 @@ You can use a ``callable`` as string or first-class syntax for passing the metho
 #### Other examples
 
 ```php
-use function Burnett01\Piper\pipe;
+use function Burnett01\Piper\with;
 
 $actual = -1234.5
       |> abs(...)
-      |> pipe(number_format(...), 2, '.', ',')
+      |> with(number_format(...), 2, '.', ',')
       |> urlencode(...);
 ```
 
@@ -102,5 +112,9 @@ $actual = -1234.5
   alias for ``Piper::to(callable $fn, mixed ...$args)`` (see above)
 
 - #### ``pipe(callable $fn, mixed ...$args)``
+
+  alias for ``Piper::to(callable $fn, mixed ...$args)`` (see above)
+
+- #### ``with(callable $fn, mixed ...$args)``
 
   alias for ``Piper::to(callable $fn, mixed ...$args)`` (see above)
