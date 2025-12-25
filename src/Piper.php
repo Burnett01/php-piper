@@ -5,34 +5,25 @@ namespace Burnett01\Piper;
 
 use Closure;
 
-final class Piper
+final readonly class Piper
 {
-    private readonly Closure $fn;
-
-    /** @var array<mixed> */
-    private array $args = [];
-
-    private function __construct(callable $fn)
-    {
-        $this->fn = Closure::fromCallable($fn);
-    }
-
-    public static function with(callable $fn): self
-    {
-        return self::_($fn);
-    }
-
-    public static function _(callable $fn): self
-    {
-        return new self($fn);
+    /** @param array<mixed> $args */
+    private function __construct(
+        private readonly Closure $fn,
+        private readonly array $args,
+    ) {
     }
 
     /** @param mixed ...$args */
-    public function args(mixed ...$args): self
+    public static function with(callable $fn, mixed ...$args): self
     {
-        $this->args = [...$this->args, ...$args];
+        return self::to($fn, ...$args);
+    }
 
-        return $this;
+    /** @param mixed ...$args */
+    public static function to(callable $fn, mixed ...$args): self
+    {
+        return new self(Closure::fromCallable($fn), $args);
     }
 
     public function __invoke(mixed $carry): mixed

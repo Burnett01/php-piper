@@ -6,7 +6,7 @@
 
 <img src=".github/piper-logo.png" alt="Piper Logo" width="300" align="right"/>
 
-**Why?**
+**Background**
 
 In PHP the pipe operator (``|>``) works with single-argument callables, such as ``strlen``, ``trim``, etc..,<br>
 
@@ -15,7 +15,7 @@ $nonce = random_bytes(16)
       |> base64_encode(...);       
 ```
 
-but what if you want to use with multi-argument callables, such as ``rtrim``, ``strtr``, etc..
+but what if you want to use it with multi-argument callables, such as ``rtrim``, ``strtr``, etc..
 
 ```php
 // does not work
@@ -26,34 +26,30 @@ $nonce = random_bytes(16)
 ```
 
 ```php
-// works but too much code
+// works but too verbose
 $nonce = random_bytes(16)
       |> base64_encode(...)
       |> (fn(string $s): string => strtr($s, '+/', '-_'))
-      |> (fn(string $s): string => rtrim($s, '='));    
+      |> (fn($s) => rtrim($s, '='));    
 ```
 
 This is where **Piper** comes into play!
 
-## How?
+## How it works
 
 **Piper** is sort of a decorator/wrapper around a callable for the pipe operator ``|>``.
 
 ### Example
 
 ```php
-use Burnett01\Piper\Piper as _;
+use Burnett01\Piper\Piper as pipe;
 
 $nonce = random_bytes(16)
       |> base64_encode(...)
-      |> _::_('strtr')->args('+/', '-_')
+      |> pipe::to('strtr', '+/', '-_')
       // or use 'with'
-      |> _::with(rtrim(...))->args('=');       
+      |> pipe::with(rtrim(...), '=');       
 ```
-
-As you can see, the pipe operator ``|>`` understands single-argument methods such as ``base64_encode``
-
-and multi-argument methods such as ``strtr``, ``rtrim`` etc.
 
 The ellipsis ``...`` represents the first-class callable syntax.
 
@@ -64,39 +60,29 @@ You can use a ``callable`` as string or first-class syntax for passing the metho
 > ``composer require burnett01/piper``
 
 ```php
-use Burnett01\Piper\Piper;
+use Burnett01\Piper\Piper as pipe;
 
 $nonce = random_bytes(16)
       |> base64_encode(...)
-      |> Piper::_('strtr')->args('+/', '-_')
-      |> Piper::_(rtrim(...))->args('=');       
-```
-
-or aliased as ``_``
-
-```php
-use Burnett01\Piper\Piper as _;
-
-$nonce = random_bytes(16)
-      |> base64_encode(...)
-      |> _::_('strtr')->args('+/', '-_')
-      |> _::_('rtrim')->args('=');       
+      |> pipe::to('strtr', '+/', '-_')
+      // with first-class syntax
+      |> pipe::to(rtrim(...), '=');       
 ```
 
 or use ``with`` alias
 
 ```php
-use Burnett01\Piper\Piper as _;
+use Burnett01\Piper\Piper as pipe;
 
 $actual = -1234.5
       |> abs(...)
-      |> _::with(number_format(...))->args(2, '.', ',')
+      |> pipe::with(number_format(...), 2, '.', ',')
       |> urlencode(...);
 ```
 
 ## Api
 
-#### ``Piper::_(callable $fn)``
+#### ``Piper::to(callable $fn, mixed ...$args)``
 
 Creates an instance of Piper for the specificed ``$fn``.
 
@@ -104,25 +90,12 @@ Parameters:
 
 - callable ``$fn`` - The name of a callable as string (eg. ``'strlen'``) or as first-class syntax (eg. ``strlen(...)``)
 
+- variadic (mixed) ``$args`` - The arguments for ``$fn``
+
 Context: static
 
 Returns: instance
 
-#### ``Piper::with(callable $fn)``
+#### ``Piper::with(callable $fn, mixed ...$args)``
 
-alias for ``Piper::_(callable $fn)`` (see above)
-
-#### ``$obj->args(array<mixed> $args)``
-
-Wires the arguments for ``$fn``.
-
-Parameters:
-
-- array<mixed> ``$args`` - The arguments for ``$fn``
-
-- Context: object
-
-- Returns: $this
-
-
-
+alias for ``Piper::to(callable $fn, mixed ...$args)`` (see above)
