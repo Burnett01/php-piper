@@ -5,6 +5,8 @@ on:
     tags:
       - "v*.*.*"
       - "*.*.*"
+  pull_request:
+    branches: ["main"]
 jobs:
   phpunit:
     runs-on: ubuntu-latest
