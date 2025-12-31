@@ -5,6 +5,8 @@ on:
     tags:
       - "v*.*.*"
       - "*.*.*"
+  pull_request:
+    branches: ["main"]
 jobs:
   phpcs:
     runs-on: ubuntu-latest
